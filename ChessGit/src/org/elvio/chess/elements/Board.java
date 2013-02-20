@@ -117,4 +117,18 @@ public class Board {
 		board[position[0]][position[1]] = piece;
 	}
 	
+	public Piece getPieceAtPosition(byte[] position){
+		return board[position[0]][position[1]];
+	}
+
+	public boolean isEnPositionInitial(Pion pion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public byte[] getPosition(byte[] maPosition, int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

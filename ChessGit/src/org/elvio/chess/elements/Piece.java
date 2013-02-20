@@ -1,6 +1,9 @@
 package org.elvio.chess.elements;
 
-public class Piece {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Piece {
 
 	protected static final String valeurBinaire = "";
 	
@@ -23,6 +26,39 @@ public class Piece {
 
 	public Piece() {
 		super();
+	}
+	
+	protected abstract List<byte[]> getPositionsJouables(Board board);
+	
+	/**
+	 * lister les positions jouables sur une ligne par la piece a partir d elle
+	 * @param board
+	 * @return
+	 */
+	protected abstract List<byte[]> getCheminsJouables(byte[] maPosition, Board board);
+	
+	protected List<byte[]> getPositionsLibreSurUnChemin(List<byte[]> positionsDUnChemin, Board board){
+		ArrayList<byte[]> positionsJouablesSurLeChemin = new ArrayList<byte[]>();
+		
+		for(byte[] position : positionsDUnChemin){
+			if(board.getPieceAtPosition(position) == null){
+				positionsJouablesSurLeChemin.add(position);
+			}else if (!isMemeCouleur(board.getPieceAtPosition(position))){
+				positionsJouablesSurLeChemin.add(position);
+				break;
+			}else{
+				break;
+			}
+		}
+		
+		return positionsJouablesSurLeChemin;
+	}
+	
+	public boolean isMemeCouleur(Piece piece){
+		if((value & BLANC) == (piece.getValue() & BLANC)){
+			return true;
+		}
+		return false;			
 	}
 
 }
